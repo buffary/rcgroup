@@ -1,0 +1,41 @@
+{include file="common:header-in" /}
+
+<div class="outer-spacer ">
+	<div class="main main-spacer">
+		<div class="container3">
+			<div class="page-content">
+				{$data.content|raw}
+			</div>
+		</div>
+		<div class="container2">
+			<div class="page-content clearfix">
+			</div>
+		</div>
+		{eq name="data.pid" value="0"}
+		{:widget('Second/make',['id'=>$data.id])}
+		{/eq}
+
+		<!-- 图片相册 -->
+		{switch data.id}
+		{case 9}{include file="gallery:nav-9" /}{/case}
+		{case 10}{include file="gallery:nav-10" /}{/case}
+		{case 11}{include file="gallery:nav-11" /}{/case}
+		{case 12}{include file="gallery:nav-12" /}{/case}
+		{case 15}{include file="gallery:nav-15" /}{/case}
+		{case 17}{include file="gallery:nav-17" /}{/case}
+		{default /}
+		{/switch}
+
+	</div>
+</div>
+
+{include file="common/footer" /}
+
+<script type="text/javascript">
+	App.view();
+	if (document.querySelectorAll('#gallery-images').length > 0) {
+		App.galleryImages("#gallery-images", "#gallery-filter");
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
+	<link rel="stylesheet" href="__STATIC__/admin/css/admin.css"/>
+	<style>
+		.layui-table-body .layui-table-cell {
+			height:60px;
+			line-height:60px;
+		}
+	</style>
+</head>
+<body class="layui-view-body">
+<div class="layui-content">
+	<div class="layui-row" style="padding:15px">
+		<div class="layui-card">
+			<div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="app-content-list">
+				<div class="layui-form-item" style="margin-bottom:0">
+					<div class="layui-inline">
+						<button class="layui-btn" id="addBtn">发布新闻</button>
+					</div>
+				</div>
+			</div>
+			<div class="layui-card-body">
+				<table id="dataTable" lay-filter="dataTable"></table>
+				<script type="text/html" id="toolbar">
+					<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+				</script>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/html" id="status-template">
+	<input type="checkbox" name="status" lay-skin="switch" lay-filter="switchStatus" lay-text="显示|关闭" value="{{ d.status }}" {{ d.status== 1 ? 'checked' : '' }}>
+</script>
+<script type="text/javascript" src="__STATIC__/layui/layui.all.js"></script>
+<script type="text/javascript">
+	layui.use(['table', 'layer', 'upload', 'form'], function () {
+		var table = layui.table, layer = layui.layer, $ = layui.$, upload = layui.upload, form = layui.form;
+
+		table.render({
+			elem: '#dataTable'
+			, height: 'full-200'
+			, url: '/admin/news/index?t=' + new Date().getTime() //数据接口
+			, page: true //开启分页
+			, method: 'post'
+			, cols: [[
+				{field: 'id', title: 'ID', width: '5%', sort: true, fixed: 'left'}
+				, {field: 'title_cn', title: '中文标题', width: '20%'}
+				, {field: 'digest_cn', title: '中文摘要', width: '20%'}
+				, {field: 'thumb', title: '缩略图', width: '10%', templet: '<div><img style="width:60px;heigth:60px" src="{{ d.thumb }}"></div>'}
+				, {field: 'image', title: '背景图片', width: '10%', templet: '<div><img style="width:60px;heigth:60px" src="{{ d.image }}"></div>'}
+				, {field: 'create_time', title: '创建时间', width: '15%'}
+				, {field: 'status', title: '状态', width: '10%', templet: '#status-template', unresize: true}
+				, {field: 'right', title: '操作', width: '10%', toolbar: "#toolbar"}
+			]]
+		});
+
+		// 发布
+		$('#addBtn').on('click', function () {
+			var formBox = parent.layer.open({
+				type: 2,
+				title: '发布新闻',
+				content: '/admin/news/edit?t=' + new Date().getTime()
+			});
+			parent.layui.layer.full(formBox);
+		});
+
+		form.on('switch(switchStatus)', function (obj) {
+			//根据业务判断是开启还是关闭
+			var status = obj.elem.checked ? 1 : 0;
+			var id = obj.othis.parents('tr').find("td :first").text();
+
+			$.post('/admin/news/status?t=' + new Date().getTime(), {"id": id, "status": status}, function (res) {
+				if (res.code == 1) {
+					table.reload('dataTable');
+				} else {
+					layer.msg('操作失败请稍后再试');
+				}
+			}, 'json');
+		});
+
+		//监听工具条
+		table.on('tool(dataTable)', function (obj) {
+			if (obj.event === 'edit') {
+				formBox = parent.layer.open({
+					type: 2,
+					title: '编辑新闻',
+					content: '/admin/news/edit?id=' + obj.data.id + '&t=' + new Date().getTime()
+				});
+				parent.layer.full(formBox);
+			}
+		});
+	});
+</script>
+</body>
+</html>

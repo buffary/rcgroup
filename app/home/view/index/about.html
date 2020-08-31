@@ -1,0 +1,79 @@
+<section class="about">
+	<div class="container2">
+		<h1>{$homeConfig.title}</h1>
+		<!-- about content #start -->
+		<div class="about-content">
+			<div class="row">
+				<div class="col-5">
+					<h2>{$homeConfig.company}</h2>
+					<p style="text-align: justify;">
+						{$homeConfig.brief}
+					</p>
+					<div class="about-logos">
+						<img src="{$homeConfig.logos}"/>
+					</div>
+				</div>
+				<!-- col #end-->
+				<div class="col-5 align-right">
+					<div class="about-large">
+						<img src="{$homeConfig.brief_image}" alt="brief-image"/>
+					</div>
+					<div id="about-slider" class="owl-carousel owl-theme about-smallimg-slider">
+						<div class="item">
+							<img src="__STATIC__/home/images/index-about-1.jpg" title="" alt=""/>
+						</div>
+						<div class="item">
+							<img src="__STATIC__/home/images/index-about-1.jpg" alt=""/>
+						</div>
+						<div class="item">
+							<img src="__STATIC__/home/images/index-about-1.jpg" alt=""/>
+						</div>
+					</div>
+					<!-- about-smallimg-slider #end -->
+				</div>
+				<!-- col #end -->
+			</div>
+			<!-- row #end -->
+		</div>
+		<!-- about content #end -->
+		<section class="statics">
+			<div class="container">
+				<div class="row counter">
+					<div class="col-3">
+                        <span class="count">
+                            {$homeConfig.num_award}
+                        </span>
+						{$Think.lang.index_010}
+					</div>
+					<div class="col-3">
+                        <span class="count">
+                            {$homeConfig.num_company}
+                        </span>
+						{$Think.lang.index_011}
+					</div>
+					<div class="col-3">
+                        <span class="count">
+                            {$homeConfig.num_turnover}
+                        </span>
+						{$Think.lang.index_012}
+					</div>
+					<div class="col-3">
+                        <span class="count">
+                            {$homeConfig.num_employees}
+                        </span>
+						{$Think.lang.index_013}
+					</div>
+				</div>
+				<!-- row #end -->
+			</div>
+			<!-- container #end -->
+		</section>
+		<!--statics #end -->
+		<p>
+			<a class="btn" title="RC Group" href="/home/nav/1">
+				About Us
+			</a>
+		</p>
+	</div>
+	<!-- container #end-->
+</section>

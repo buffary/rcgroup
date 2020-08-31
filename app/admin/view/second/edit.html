@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="__STATIC__/layui/css/layui.css">
+	<link rel="stylesheet" href="__STATIC__/admin/css/admin.css"/>
+	<link rel="stylesheet" href="__STATIC__/um/themes/default/css/umeditor.css">
+	<title>管理后台</title>
+	<style>
+		.layui-form-label {width:120px}
+		.layui-input-block {margin-left:160px}
+	</style>
+</head>
+<body class="layui-view-body">
+<div class="layui-content">
+	<div class="layui-row" style="padding:15px">
+		<div class="layui-card">
+			<div class="layui-card-body" style="padding: 15px;">
+				<form class="layui-form" action="" id="dataForm">
+					<div class="layui-row layui-col-space10 layui-form-item">
+						<div class="layui-col-lg6">
+							<label class="layui-form-label">背景图片</label>
+							<div class="layui-input-block">
+								<div class="layui-upload-drag uploadDiv">
+									<i class="layui-icon"></i>
+									<p>点击上传，尺寸必须是1920*800</p>
+									<input type="hidden" name="image" required lay-verify="required" lay-reqtext="请上传背景图片" value="{$nav.image}">
+								</div>
+								<div class="layui-inline imgDiv">
+									<img class="showPath" src="{$nav.imageShow|default='__STATIC__/admin/images/default.png'}" style="width:293px;height:100%">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="layui-row layui-col-space10 layui-form-item">
+						<div class="layui-col-lg6" style="z-index:999999">
+							<label class="layui-form-label">顶级导航</label>
+							<div class="layui-input-block">
+								<select name="pid" lay-verify="required" lay-search="">
+									<option value="">== 请选择顶级导航 ==</option>
+									{foreach $topNavList as $v }
+									<option value="{$v.id}">{$v.name}</option>
+									{/foreach}
+								</select>
+							</div>
+						</div>
+						<div class="layui-col-lg6">
+							<label class="layui-form-label">排序值</label>
+							<div class="layui-input-inline" style="margin-left:10px">
+								<input type="text" name="sort" value="{$nav.sort|default=10000}" lay-verify="required" autocomplete="off" class="layui-input layui-form-danger">
+							</div>
+							<div class="layui-form-mid layui-word-aux">数值越小越优先展示</div>
+						</div>
+					</div>
+
+					<div class="layui-row layui-col-space10 layui-form-item">
+						<div class="layui-col-lg6">
+							<label class="layui-form-label">菜单中文名称</label>
+							<div class="layui-input-block">
+								<input type="text" name="name_cn" value="{$nav.name_cn}" lay-verify="required" autocomplete="off" class="layui-input layui-form-danger">
+							</div>
+						</div>
+						<div class="layui-col-lg6">
+							<label class="layui-form-label">菜单英文名称</label>
+							<div class="layui-input-block">
+								<input type="text" name="name_en" value="{$nav.name_en}" lay-verify="required" autocomplete="off" class="layui-input layui-form-danger">
+							</div>
+						</div>
+					</div>
+
+					<div class="layui-row layui-col-space10 layui-form-item">
+						<div class="layui-col-lg6">
+							<label class="layui-form-label">菜单中文标题</label>
+							<div class="layui-input-block">
+								<input type="text" name="title_cn" value="{$nav.title_cn}" lay-verify="required" autocomplete="off" class="layui-input layui-form-danger">
+							</div>
+						</div>
+						<div class="layui-col-lg6">
+							<label class="layui-form-label">菜单英文标题</label>
+							<div class="layui-input-block">
+								<input type="text" name="title_en" value="{$nav.title_en}" lay-verify="required" autocomplete="off" class="layui-input layui-form-danger">
+							</div>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">相册</label>
+						<div class="layui-input-block">
+							<button type="button" class="layui-btn" id="addAlbum"><i class="layui-icon"></i>新增相册，可同时选择多张，自行去重</button>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">中文内容</label>
+						<div class="layui-input-block">
+							<script id="container-cn" lay-verify="content" required lay-verify="required" name="content_cn" type="text/plain" style="width:100%;height:300px;">{$nav.content_cn|raw}</script>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">英文内容</label>
+						<div class="layui-input-block">
+							<script id="container-en" lay-verify="content" required lay-verify="required" name="content_en" type="text/plain" style="width:100%;height:300px;">{$nav.content_en|raw}</script>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<div class="layui-footer">
+								<input type="hidden" name="id" value="{$nav.id|default=0}">
+								<button class="layui-btn" lay-submit="" lay-filter="dataForm">立即提交</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__STATIC__/layui/layui.all.js"></script>
+<script type="text/javascript" src="__STATIC__/um/third-party/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/um/umeditor.config.js"></script>
+<script type="text/javascript" src="__STATIC__/um/umeditor.js"></script>
+<script type="text/javascript" src="__STATIC__/um/lang/zh-cn/zh-cn.js"></script>
+<script type="text/html">
+
+</script>
+<script type="text/javascript">
+	layui.use(['layer', 'upload', 'form'], function () {
+		var layer = layui.layer, $ = jQuery = layui.$, upload = layui.upload, form = layui.form;
+		var pid = "{$nav.pid|default=0}";
+		$('select[name=pid]').val(pid);
+		form.render("select");
+
+		// 单图上传
+		upload.render({
+			elem: '.uploadDiv'
+			, exts: 'jpg|png|gif|bmp|jpeg|ico' //只允许上传压缩文件
+			, accept: 'images' //普通文件
+			, data: {crop: 1}
+			, url: '/common/upload/image?t=' + new Date().getTime() //改成您自己的上传接口
+			, done: function (res) {
+				if (res.code == 1) {
+					var _this = $(this.item);
+					_this.find('input').val(res.data.path);
+					_this.siblings('.imgDiv').find('.showPath').attr("src", res.data.pathShow);
+				} else {
+					layer.msg('上传失败，请重试');
+				}
+			}
+		});
+
+		// 相册多图上传
+		var demoListView = $('#demoList')
+			, uploadListIns = upload.render({
+			elem: '#testList'
+			, url: 'https://httpbin.org/post' //改成您自己的上传接口
+			, accept: 'file'
+			, multiple: true
+			, auto: false
+			, bindAction: '#testListAction'
+			, choose: function (obj) {
+				var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+				//读取本地文件
+				obj.preview(function (index, file, result) {
+					var tr = $(['<tr id="upload-' + index + '">'
+						, '<td>' + file.name + '</td>'
+						, '<td>' + (file.size / 1024).toFixed(1) + 'kb</td>'
+						, '<td>等待上传</td>'
+						, '<td>'
+						, '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+						, '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+						, '</td>'
+						, '</tr>'].join(''));
+
+					//单个重传
+					tr.find('.demo-reload').on('click', function () {
+						obj.upload(index, file);
+					});
+
+					//删除
+					tr.find('.demo-delete').on('click', function () {
+						delete files[index]; //删除对应的文件
+						tr.remove();
+						uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+					});
+
+					demoListView.append(tr);
+				});
+			}
+			, done: function (res, index, upload) {
+				if (res.files.file) { //上传成功
+					var tr = demoListView.find('tr#upload-' + index)
+						, tds = tr.children();
+					tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+					tds.eq(3).html(''); //清空操作
+					return delete this.files[index]; //删除文件队列已经上传成功的文件
+				}
+				this.error(index, upload);
+			}
+			, error: function (index, upload) {
+				var tr = demoListView.find('tr#upload-' + index)
+					, tds = tr.children();
+				tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+				tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+			}
+		});
+
+		// 初始化编辑器
+		var umConfig = {
+			'fontsize': [10, 11, 12, 14, 16, 18, 20, 24, 36, 48],
+			'initialFrameWidth': '100%'
+		};
+		UM.getEditor('container-cn', umConfig);
+		UM.getEditor('container-en', umConfig);
+
+		//监听提交
+		form.on('submit(dataForm)', function () {
+			$.post('/admin/second/edit?t=' + new Date().getTime(), $('#dataForm').serialize(), function (res) {
+				if (res.code == 1) {
+					parent.layer.closeAll();
+					parent.layui.table.reload('dataTable');
+				} else {
+					layer.msg(res.msg);
+				}
+			}, 'json');
+			return false;
+		});
+	});
+</script>
+</body>
+</html>

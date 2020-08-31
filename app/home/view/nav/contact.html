@@ -1,0 +1,26 @@
+{include file="common:header-in" /}
+
+<div class="outer-spacer ">
+	<div class="main main-spacer">
+		<div class="container3">
+			<div class="page-content">
+				<div id="load-more" class="clearfix">
+					<h2>{$data.content|raw}</h2>
+				</div>
+			</div>
+		</div>
+		<div class="container2">
+			<div class="page-content clearfix">
+			</div>
+		</div>
+		{:widget('Contact/make')}
+
+	</div>
+</div>
+
+{include file="common/footer" /}
+<script type="text/javascript">
+	App.view();
+</script>
+</body>
+</html>

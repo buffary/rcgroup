@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="author" content="RC Group">
+	<link href="{$config.favicon}" type="image/x-icon" rel="shortcut icon"/>
+	<title>{$config.site_name}</title>
+	<meta content="{$config.keyword}" name="Keywords">
+	<meta name="description" content="{$config.description}"/>
+	<link rel="stylesheet" href="__STATIC__/home/css/styles.css"/>
+	<style>
+		button:hover { background:#DFBAAF; }
+	</style>
+	<script type="text/javascript">
+		var App = {
+			baseUrl: "",
+			isMobile: false,
+			isTablet: false,
+			isHomePage: true
+		};
+	</script>
+</head>
+<body>
+<header id="header" class="header ">
+	<a href="/" class="logo-svg" title="{$config.site_name}"><img src="{$config.logo}" alt="logo"></a>
+	<div class="menu-section">
+		<nav class="menu" id="secondary-menu">
+			<ul class="lang">
+				<li>
+					<a href="?lang=zh-cn" class="active" style="margin-top:-2px">中文</a>
+				</li>
+				<li>
+					<a href="?lang=en-us">EN</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="main-bar">
+			<nav class="menu" id="primary-menu">
+				<ul>
+					{foreach navList as $first}
+					<li>
+						<a href="/home/nav/{$first.id}" title="{$first.name}" target="_self">{$first.name}</a>
+						{notempty name="first.child"}
+						<ul>
+							{foreach $first['child'] as $second}
+							<li>
+								<a href="/home/nav/{$second.id}" title="{$second.name}" class="hide-submenu" target="_self">
+									{$second.name}
+								</a>
+							</li>
+							{/foreach}
+						</ul>
+						{/notempty}
+					</li>
+					{/foreach}
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>

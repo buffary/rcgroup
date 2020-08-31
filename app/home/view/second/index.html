@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="intro-blocks">
+		<div class="row jc">
+			{foreach $secondList as $v}
+			<div class="col-4">
+				<div class="intro-block wow fadeIn" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s; animation-name: fadeIn;">
+					<a href="/home/nav/{$v.id}" class="zoom-img" title="{$v.name}">
+						<img src="{$v.image}" title="{$v.name}" alt="{$v.name}">
+					</a>
+					<h2>
+						<a href="/home/nav/{$v.id}" title="{$v.name}">{$v.name}</a>
+					</h2>
+					<a href="/home/nav/{$v.id}" title="{$Think.lang.news_detail_btn}" class="btn">
+						{$Think.lang.news_detail_btn}
+					</a>
+				</div>
+			</div>
+			{/foreach}
+		</div>
+	</div>
+</div>

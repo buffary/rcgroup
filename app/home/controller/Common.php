@@ -3,6 +3,7 @@ declare (strict_types=1);
 
 namespace app\home\controller;
 
+use app\common\helper\Tools;
 use app\home\service\ConfigService;
 use app\home\service\NavService;
 use think\App;
@@ -62,6 +63,7 @@ abstract class Common
 		View::assign([
 			'config'  => ConfigService::make(),
 			'navList' => NavService::getList(),
+			'lang'    => Tools::lang(),
 		]);
 	}
 

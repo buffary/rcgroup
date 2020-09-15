@@ -3,9 +3,9 @@
 namespace app\home\service;
 
 use app\common\helper\Image;
+use app\common\helper\Tools;
 use app\model\NavModel;
 use think\facade\Cache;
-use think\facade\Lang;
 
 /**
  * @desc    导航服务层
@@ -19,7 +19,7 @@ class NavService
 	 */
 	public static function getList ()
 	{
-		$lang    = Lang::getLangSet();
+		$lang    = Tools::lang();
 		$navList = json_decode(Cache::get('navList', null), true);
 		if (null == $navList) {
 			// 从数据库中获取
@@ -57,7 +57,7 @@ class NavService
 
 			Cache::set('navList', json_encode($navList));
 		}
-		
+
 		return $lang == 'en-us' ? $navList['en'] : $navList['cn'];
 	}
 
@@ -68,7 +68,7 @@ class NavService
 	public static function get4IndexSlider ()
 	{
 		$dataList = [];
-		$lang     = Lang::getLangSet();
+		$lang     = Tools::lang();
 		$list     = NavModel::where('pid', 2)
 			->field(['id', 'name_cn', 'name_en', 'title_cn', 'title_en', 'image'])
 			->order('sort', 'AES')

@@ -36,4 +36,9 @@ Route::group('', function () {
 	Route::any('news/edit', 'News/edit');
 	Route::any('news/status', 'News/status');
 
+	// 案例管理
+	Route::any('cases/index', 'Cases/index');
+	Route::any('cases/edit', 'Cases/edit');
+	Route::any('cases/del', 'Cases/del');
+
 })->middleware(app\admin\middleware\CheckLogin::class);

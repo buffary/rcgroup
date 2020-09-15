@@ -3,9 +3,9 @@
 namespace app\home\service;
 
 use app\common\helper\Image;
+use app\common\helper\Tools;
 use app\model\ConfigModel;
 use think\facade\Cache;
-use think\facade\Lang;
 
 /**
  * @desc    全站配置
@@ -27,8 +27,8 @@ class ConfigService
 			Cache::set('config', json_encode($config));
 		}
 
-	
-		$lang = Lang::getLangSet();
+
+		$lang = Tools::lang();
 		if ($lang == 'en-us') {
 			return [
 				'site_name'   => $config['site_name_en'],

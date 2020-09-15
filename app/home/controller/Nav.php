@@ -3,8 +3,8 @@
 namespace app\home\controller;
 
 use app\common\helper\Image;
+use app\common\helper\Tools;
 use app\model\NavModel;
-use think\facade\Lang;
 
 /**
  * @desc    导航控制器
@@ -20,7 +20,7 @@ class Nav extends Common
 			return redirect('/');
 		}
 
-		$lang = Lang::getLangSet();
+		$lang = Tools::lang();
 		if ($lang == 'en-us') {
 			$data = [
 				'id'      => $model->id,

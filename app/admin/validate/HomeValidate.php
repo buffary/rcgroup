@@ -24,8 +24,7 @@ class HomeValidate extends Validate
 		'num_company'   => 'require',
 		'num_turnover'  => 'require',
 		'num_employees' => 'require',
-		'content_cn'    => 'require',
-		'content_en'    => 'require',
+		'sudoku'        => 'require',
 	];
 
 	protected $message = [
@@ -41,7 +40,6 @@ class HomeValidate extends Validate
 		'num_company.require'   => '公司个数不能为空',
 		'num_turnover.require'  => '百万欧元营业额不能为空',
 		'num_employees.require' => '员工个数不能为空',
-		'content_cn.require'    => '中文内容不能为空',
-		'content_en.require'    => '英文内容不能为空',
+		'sudoku.require'        => '九宫格图片不能为空',
 	];
 }

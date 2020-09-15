@@ -3,8 +3,8 @@
 namespace app\home\controller;
 
 use app\BaseController;
+use app\common\helper\Tools;
 use app\model\ContactModel;
-use think\facade\Lang;
 
 /**
  * @desc    联系人控制器
@@ -15,7 +15,7 @@ class Contact extends BaseController
 {
 	public function create ()
 	{
-		$lang = Lang::getLangSet();
+		$lang = Tools::lang();
 		if ($lang == 'en-us') {
 			$successMsg = 'Submitted Successfully';
 			$failMsg    = 'Submitted Failed,Try Again';

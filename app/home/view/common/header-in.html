@@ -28,10 +28,10 @@
 		<nav class="menu" id="secondary-menu">
 			<ul class="lang">
 				<li>
-					<a href="?lang=zh-cn" class="active" style="margin-top:-2px">中文</a>
+					<a href="?lang=zh-cn" style="margin-top:-2px" {if condition="$lang eq 'zh-cn'" }class="active" {/if}>中文</a>
 				</li>
 				<li>
-					<a href="?lang=en-us">EN</a>
+					<a href="?lang=en-us" {if condition="$lang eq 'en-us'" }class="active" {/if}>EN</a>
 				</li>
 			</ul>
 		</nav>

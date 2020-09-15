@@ -4,8 +4,8 @@ namespace app\home\widget;
 
 use app\BaseController;
 use app\common\helper\Image;
+use app\common\helper\Tools;
 use app\model\NewsModel;
-use think\facade\Lang;
 use think\facade\View;
 
 /**
@@ -18,7 +18,7 @@ class News extends BaseController
 	public function make ()
 	{
 		$dataList = [];
-		$lang     = Lang::getLangSet();
+		$lang     = Tools::lang();
 
 		$list = NewsModel::where('status', 1)
 			->order('id', 'DESC')

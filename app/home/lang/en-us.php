@@ -11,12 +11,13 @@ return [
 
 	// 首页
 	'index_001'       => 'OUR COMMITMENTS',
-	'index_002'       => 'ECONOMY',
+	'index_002'       => 'WINDOW DISPLAY',
 	'index_003'       => 'Acting on the local economic fabric',
-	'index_004'       => 'SOCIAL',
+	'index_004'       => 'POP MATERIAL',
 	'index_005'       => 'Human in the heart of the system',
-	'index_006'       => 'ENVIRONMENT',
+	'index_006'       => 'INTERIOR CONSTRUCTION',
 	'index_007'       => 'Innovating sustainably',
+	'index_008'       => 'IMG INTEGRATED MARKETING',
 
 	'index_010'        => 'AWARDS',
 	'index_011'        => 'RC GROUP COMPANIES',

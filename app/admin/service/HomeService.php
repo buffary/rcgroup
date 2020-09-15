@@ -38,8 +38,7 @@ class HomeService
 			'num_company'   => $model->num_company ?? 0,
 			'num_turnover'  => $model->num_turnover ?? 0,
 			'num_employees' => $model->num_employees ?? 0,
-			'content_cn'    => $model->content_cn ?? '',
-			'content_en'    => $model->content_en ?? '',
+			'sudoku'        => Image::batch($model->sudoku),
 		];
 	}
 
@@ -51,7 +50,9 @@ class HomeService
 	public static function edit (array &$data)
 	{
 		Cache::delete('index_config');
-		$model = HomeModel::where('id', 1)->find();
+
+		$data['sudoku'] = implode(',', $data['sudoku']);
+		$model          = HomeModel::where('id', 1)->find();
 		if (null == $model) {
 			// 新增
 			HomeModel::create($data);

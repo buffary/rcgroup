@@ -3,9 +3,9 @@
 namespace app\home\service;
 
 use app\common\helper\Image;
+use app\common\helper\Tools;
 use app\model\HomeModel;
 use think\facade\Cache;
-use think\facade\Lang;
 
 /**
  * @desc    首页配置服务层
@@ -24,7 +24,7 @@ class HomeService
 			Cache::set('index_config', json_encode($config));
 		}
 
-		$lang = Lang::getLangSet();
+		$lang = Tools::lang();
 		if ($lang == 'en-us') {
 			return [
 				'title'         => $config['title_en'],
@@ -36,7 +36,7 @@ class HomeService
 				'num_company'   => $config['num_company'],
 				'num_turnover'  => $config['num_turnover'],
 				'num_employees' => $config['num_employees'],
-				'content'       => $config['content_en'],
+				'sudoku'        => Image::batch($config['sudoku']),
 			];
 		}
 
@@ -50,7 +50,7 @@ class HomeService
 			'num_company'   => $config['num_company'],
 			'num_turnover'  => $config['num_turnover'],
 			'num_employees' => $config['num_employees'],
-			'content'       => $config['content_cn'],
+			'sudoku'        => Image::batch($config['sudoku']),
 		];
 	}
 }

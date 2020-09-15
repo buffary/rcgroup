@@ -4,8 +4,8 @@ namespace app\home\widget;
 
 use app\BaseController;
 use app\common\helper\Image;
+use app\common\helper\Tools;
 use app\model\NavModel;
-use think\facade\Lang;
 use think\facade\View;
 
 /**
@@ -18,7 +18,7 @@ class Second extends BaseController
 	public function make (array $data)
 	{
 		$dataList = [];
-		$lang     = Lang::getLangSet();
+		$lang     = Tools::lang();
 		$list     = NavModel::where(['pid' => $data['id'], 'status' => 1])
 			->field(['id', 'name_cn', 'name_en', 'image'])
 			->order('sort', 'AES')

@@ -3,8 +3,8 @@
 namespace app\home\widget;
 
 use app\BaseController;
+use app\common\helper\Tools;
 use app\model\ConfigModel;
-use think\facade\Lang;
 use think\facade\View;
 
 /**
@@ -16,7 +16,7 @@ class Contact extends BaseController
 {
 	public function make ()
 	{
-		$lang  = Lang::getLangSet();
+		$lang  = Tools::lang();
 		$model = ConfigModel::where('id', 1)
 			->field(['address_cn', 'address_en', 'mobile', 'email', 'location'])
 			->find();

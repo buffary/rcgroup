@@ -3,8 +3,8 @@
 namespace app\home\controller;
 
 use app\common\helper\Image;
+use app\common\helper\Tools;
 use app\model\NewsModel;
-use think\facade\Lang;
 
 /**
  * @desc    新闻控制器
@@ -20,7 +20,7 @@ class News extends Common
 			return redirect('/');
 		}
 
-		$lang = Lang::getLangSet();
+		$lang = Tools::lang();
 		if ($lang == 'en-us') {
 			$data = [
 				'id'      => $model->id,

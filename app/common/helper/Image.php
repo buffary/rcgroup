@@ -34,4 +34,21 @@ class Image
 		}
 		return $image;
 	}
+
+	public static function batch (string $images = '')
+	{
+		$imageArr = [];
+		if ($images) {
+			$host     = config('app.app_host') . '/';
+			$imageArr = explode(',', $images);
+			array_walk($imageArr, function (&$item) use ($host) {
+				$item = [
+					'path' => $item,
+					'show' => $host . $item,
+				];
+			});
+		}
+
+		return $imageArr;
+	}
 }

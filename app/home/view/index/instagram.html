@@ -5,7 +5,19 @@
 		</h2>
 
 		<div class="instagram-list">
-			{$homeConfig.content|raw}
+			<ul class="lightwidget lightwidget--grid lightwidget--grid-3 lightwidget--image-format-square lightwidget--click-event-none" data-id="8240caeb9f0d5d4a9b7f2dc28e40fb90">
+				{foreach $homeConfig['sudoku'] as $item }
+				<li class="lightwidget__tile">
+					<a class="lightwidget__link" href="javascript:void(0)" tabindex="-1">
+						<figure class="lightwidget__photo">
+							<div class="lightwidget__image-wrapper lightwidget__image-wrapper--image">
+								<img class="lightwidget__image" srcset="{$item.show}" src="{$item.show}" sizes="50vw" alt="">
+							</div>
+						</figure>
+					</a>
+				</li>
+				{/foreach}
+			</ul>
 		</div>
 	</div>
 </section>

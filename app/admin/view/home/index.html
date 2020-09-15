@@ -119,13 +119,13 @@
 
 					<div class="layui-form-item" id="pics">
 						<div class="layui-form-label">首页九宫格</div>
-						<div class="layui-input-block" style="width: 70%;">
+						<div class="layui-input-block">
 							<div class="layui-upload">
 								<button type="button" class="layui-btn layui-btn-primary pull-left" id="slide-pc">选择多图，最多30张，大小建议为380*380以上</button>
-								<div class="pic-more">
+								<div class="pic-more layui-row">
 									<ul class="pic-more-upload-list" id="slide-pc-priview">
 										{notempty name="$config.sudoku"}
-										{foreach $config.sudoku as $v }
+										{foreach $config.sudoku as $k=>$v }
 										<li class="item_img">
 											<div class="operate">
 												<i class="toleft layui-icon">《</i>
@@ -136,6 +136,7 @@
 											</div>
 											<img src="{$v.show}" class="img">
 											<input type="hidden" name="sudoku[]" value="{$v.path}"/>
+											<input type="text" name="url[]" value="{$config['url'][$k]}" required lay-verify="required" placeholder="请输入案例网址" autocomplete="off" class="layui-input">
 										</li>
 										{/foreach}
 										{/notempty}
@@ -204,7 +205,7 @@
 					layer.msg('九宫格最多上传30张图片');
 					return false;
 				}
-				$('#slide-pc-priview').append('<li class="item_img"><div class="operate"><i class="toleft layui-icon">《</i><i class="toright layui-icon">》</i><i  class="close layui-icon"><img style="height: 32px;width: 32px;" src="__STATIC__/home/images/del.png"></i></div><img src="' + res.data.pathShow + '" class="img" ><input type="hidden" name="sudoku[]" value="' + res.data.path + '" /></li>');
+				$('#slide-pc-priview').append('<li class="item_img"><div class="operate"><i class="toleft layui-icon">《</i><i class="toright layui-icon">》</i><i  class="close layui-icon"><img style="height: 32px;width: 32px;" src="__STATIC__/home/images/del.png"></i></div><img src="' + res.data.pathShow + '" class="img" ><input type="hidden" name="sudoku[]" value="' + res.data.path + '" /><input type="text" name="url[]" value="" required lay-verify="required" placeholder="请输入案例网址" autocomplete="off" class="layui-input"></li>');
 			}
 		});
 

@@ -24,6 +24,10 @@ class HomeService
 			Cache::set('index_config', json_encode($config));
 		}
 
+		$urlArr = [];
+		if (!empty($config['url'])) $urlArr = explode(',', $config['url']);
+
+
 		$lang = Tools::lang();
 		if ($lang == 'en-us') {
 			return [
@@ -37,6 +41,7 @@ class HomeService
 				'num_turnover'  => $config['num_turnover'],
 				'num_employees' => $config['num_employees'],
 				'sudoku'        => Image::batch($config['sudoku']),
+				'url'           => $urlArr,
 			];
 		}
 
@@ -51,6 +56,7 @@ class HomeService
 			'num_turnover'  => $config['num_turnover'],
 			'num_employees' => $config['num_employees'],
 			'sudoku'        => Image::batch($config['sudoku']),
+			'url'           => $urlArr,
 		];
 	}
 }

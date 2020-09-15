@@ -35,6 +35,7 @@ class CasesService
 					'content_cn'  => $item->content_cn,
 					'content_en'  => $item->content_en,
 					'create_time' => $item->create_time,
+					'url'         => config('app.app_host') . '/home/cases/' . $item->id,
 				];
 			});
 		}

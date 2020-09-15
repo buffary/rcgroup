@@ -21,6 +21,10 @@ class HomeService
 	{
 		$model = HomeModel::where('id', 1)->find();
 
+		$urlArr = [];
+		if (!empty($model->url)) $urlArr = explode(',', $model->url);
+
+
 		return [
 			'id'              => $model->id ?? 0,
 			'title_cn'        => $model->title_cn ?? '',
@@ -39,6 +43,7 @@ class HomeService
 			'num_turnover'  => $model->num_turnover ?? 0,
 			'num_employees' => $model->num_employees ?? 0,
 			'sudoku'        => Image::batch($model->sudoku),
+			'url'           => $urlArr,
 		];
 	}
 
@@ -52,6 +57,7 @@ class HomeService
 		Cache::delete('index_config');
 
 		$data['sudoku'] = implode(',', $data['sudoku']);
+		$data['url']    = implode(',', $data['url']);
 		$model          = HomeModel::where('id', 1)->find();
 		if (null == $model) {
 			// 新增

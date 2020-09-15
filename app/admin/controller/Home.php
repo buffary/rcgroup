@@ -44,6 +44,7 @@ class Home extends BaseController
 			'num_turnover'  => $this->request->post('num_turnover') + 0,
 			'num_employees' => $this->request->post('num_employees') + 0,
 			'sudoku'        => $this->request->post('sudoku'),
+			'url'           => $this->request->post('url'),
 		];
 		validate(HomeValidate::class)->check($data);
 

@@ -28,7 +28,6 @@
 				<table id="dataTable" lay-filter="dataTable"></table>
 				<script type="text/html" id="toolbar">
 					<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="preview">点我预览</a>
-					<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="copy">拷贝网址</a>
 					<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 					<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 				</script>
@@ -48,12 +47,13 @@
 			, page: true //开启分页
 			, method: 'post'
 			, cols: [[
-				{field: 'id', title: 'ID', width: '10%', sort: true, fixed: 'left'}
+				{field: 'id', title: 'ID', width: '5%', sort: true, fixed: 'left'}
 				, {field: 'title_cn', title: '中文标题', width: '20%'}
 				, {field: 'title_en', title: '英文标题', width: '20%'}
-				, {field: 'banner', title: 'banner图', width: '10%', templet: '<div><img style="width:60px;heigth:60px" src="{{ d.image }}"></div>'}
-				, {field: 'create_time', title: '创建时间', width: '15%'}
-				, {field: 'right', title: '操作', width: '25%', toolbar: "#toolbar"}
+				, {field: 'banner', title: 'banner图', width: '7%', templet: '<div><img style="width:60px;heigth:60px" src="{{ d.image }}"></div>'}
+				, {field: 'create_time', title: '创建时间', width: '13%'}
+				, {field: 'url', title: '网址（自行双击或者选中复制）', width: '20%'}
+				, {field: 'right', title: '操作', width: '15%', toolbar: "#toolbar"}
 			]]
 		});
 
@@ -70,9 +70,14 @@
 		//监听工具条
 		table.on('tool(dataTable)', function (obj) {
 			if (obj.event == 'preview') {
-
-			} else if (obj.event === 'copy') {
-
+				var previewIndex = layer.open({
+					type: 2,
+					title: '案例预览',
+					content: obj.data.url,
+					area: ['320px', '195px'],
+					maxmin: true
+				});
+				layer.full(previewIndex);
 			} else if (obj.event === 'edit') {
 				formBox = parent.layer.open({
 					type: 2,

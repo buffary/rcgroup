@@ -25,6 +25,7 @@ class HomeValidate extends Validate
 		'num_turnover'  => 'require',
 		'num_employees' => 'require',
 		'sudoku'        => 'require',
+		'url'           => 'require',
 	];
 
 	protected $message = [
@@ -41,5 +42,6 @@ class HomeValidate extends Validate
 		'num_turnover.require'  => '百万欧元营业额不能为空',
 		'num_employees.require' => '员工个数不能为空',
 		'sudoku.require'        => '九宫格图片不能为空',
+		'url.require'           => '案例链接不能为空',
 	];
 }

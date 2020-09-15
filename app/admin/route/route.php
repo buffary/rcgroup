@@ -38,6 +38,7 @@ Route::group('', function () {
 
 	// 案例管理
 	Route::any('cases/index', 'Cases/index');
+	Route::any('cases/show', 'Cases/show');
 	Route::any('cases/edit', 'Cases/edit');
 	Route::any('cases/del', 'Cases/del');
 

@@ -27,8 +27,10 @@
 			<div class="layui-card-body">
 				<table id="dataTable" lay-filter="dataTable"></table>
 				<script type="text/html" id="toolbar">
+					<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="preview">点我预览</a>
+					<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="copy">拷贝网址</a>
 					<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-					<a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+					<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
 				</script>
 			</div>
 		</div>
@@ -46,13 +48,12 @@
 			, page: true //开启分页
 			, method: 'post'
 			, cols: [[
-				{field: 'id', title: 'ID', width: '5%', sort: true, fixed: 'left'}
+				{field: 'id', title: 'ID', width: '10%', sort: true, fixed: 'left'}
 				, {field: 'title_cn', title: '中文标题', width: '20%'}
 				, {field: 'title_en', title: '英文标题', width: '20%'}
-				, {field: 'url', title: '点我预览', width: '20%'}
-				, {field: 'banner', title: 'banner图', width: '10%', templet: '<div><img style="width:60px;heigth:60px" src="{{ d.thumb }}"></div>'}
+				, {field: 'banner', title: 'banner图', width: '10%', templet: '<div><img style="width:60px;heigth:60px" src="{{ d.image }}"></div>'}
 				, {field: 'create_time', title: '创建时间', width: '15%'}
-				, {field: 'right', title: '操作', width: '10%', toolbar: "#toolbar"}
+				, {field: 'right', title: '操作', width: '25%', toolbar: "#toolbar"}
 			]]
 		});
 
@@ -68,13 +69,32 @@
 
 		//监听工具条
 		table.on('tool(dataTable)', function (obj) {
-			if (obj.event === 'edit') {
+			if (obj.event == 'preview') {
+
+			} else if (obj.event === 'copy') {
+
+			} else if (obj.event === 'edit') {
 				formBox = parent.layer.open({
 					type: 2,
-					title: '编辑新闻',
+					title: '编辑案例',
 					content: '/admin/cases/edit?id=' + obj.data.id + '&t=' + new Date().getTime()
 				});
 				parent.layer.full(formBox);
+			} else if (obj.event === 'del') {
+				layer.msg('确定要删除本案例吗？', {
+					time: 0 //不自动关闭
+					, btn: ['确定', '取消']
+					, yes: function (index) {
+						$.post('/admin/cases/delete?t=' + new Date().getTime(), {id: obj.data.id}, function (res) {
+							if (res.code == 1) {
+								parent.layer.closeAll();
+								parent.layui.table.reload('dataTable');
+							} else {
+								layer.msg(res.msg);
+							}
+						}, 'json');
+					}
+				});
 			}
 		});
 	});

@@ -3,6 +3,7 @@
 namespace app\model;
 
 use think\Model;
+use think\model\concern\SoftDelete;
 
 /**
  * @desc    案例模型
@@ -11,5 +12,8 @@ use think\Model;
  */
 class CaseModel extends Model
 {
+
+	use SoftDelete;
+
 	protected $name = 'case';
 }

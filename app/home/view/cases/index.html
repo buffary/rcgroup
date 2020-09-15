@@ -1,0 +1,22 @@
+{include file="common:header-in" /}
+
+<div class="outer-spacer ">
+	<div class="main main-spacer">
+		<div class="container3">
+			<div class="page-content">
+				{$data.content|raw}
+			</div>
+		</div>
+	</div>
+</div>
+
+{include file="common/footer" /}
+
+<script type="text/javascript">
+	App.view();
+	if (document.querySelectorAll('#gallery-images').length > 0) {
+		App.galleryImages("#gallery-images", "#gallery-filter");
+	}
+</script>
+</body>
+</html>

@@ -79,4 +79,15 @@ class CasesService
 		}
 		return ['code' => 1];
 	}
+
+	/**
+	 * 删除
+	 * @param int $id
+	 * @return int[]
+	 */
+	public static function delete (int $id)
+	{
+		CaseModel::destroy($id);
+		return ['code' => 1];
+	}
 }

@@ -23,6 +23,7 @@ return [
 	'index_011'        => '旗下公司数',
 	'index_012'        => '百万欧元营业额',
 	'index_013'        => '雇员数',
+	'index_099'        => 'RC GROUP 在Instagram展示',
 
 	// 联系我们
 	'contact_001'      => '联系我们任何信息或要求报价',

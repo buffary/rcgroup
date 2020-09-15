@@ -2,8 +2,8 @@
 
 namespace app\admin\controller;
 
-use app\admin\service\NewsService;
-use app\admin\validate\NewsValidate;
+use app\admin\service\CasesService;
+use app\admin\validate\CaseValidate;
 use app\BaseController;
 
 /**
@@ -26,7 +26,7 @@ class Cases extends BaseController
 				'page'  => $this->request->post('page', 1),
 				'limit' => $this->request->post('limit', 20),
 			];
-			$json = NewsService::getList($data);
+			$json = CasesService::getList($data);
 			return json($json);
 		}
 	}
@@ -37,37 +37,33 @@ class Cases extends BaseController
 	public function edit ()
 	{
 		if ($this->request->isGet()) {
-			$id   = $this->request->get('id', 0);
-			$news = NewsService::show($id);
-			return view('edit', ['news' => $news]);
+			$id    = $this->request->get('id', 0);
+			$cases = CasesService::show($id);
+			return view('edit', ['cases' => $cases]);
 		} else {
 			$id   = $this->request->post('id', 0);
 			$data = [
 				'title_cn'   => $this->request->post('title_cn'),
 				'title_en'   => $this->request->post('title_en'),
-				'thumb'      => $this->request->post('thumb'),
 				'image'      => $this->request->post('image'),
-				'digest_cn'  => $this->request->post('digest_cn'),
-				'digest_en'  => $this->request->post('digest_en'),
 				'content_cn' => $this->request->post('content_cn'),
 				'content_en' => $this->request->post('content_en'),
 			];
-			$this->validate($data, NewsValidate::class);
+			$this->validate($data, CaseValidate::class);
 
-			$json = NewsService::edit($id, $data);
+			$json = CasesService::edit($id, $data);
 			return json($json);
 		}
 	}
 
 	/**
-	 * 修改状态
+	 * 删除状态
 	 * @return \think\response\Json
 	 */
-	public function status ()
+	public function delete ()
 	{
 		$id   = $this->request->post('id', 0);
-		$data = ['status' => $this->request->post('status', 1)];
-		$json = NewsService::edit($id, $data);
+		$json = CasesService::delete($id);
 		return json($json);
 	}
 }

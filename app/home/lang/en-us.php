@@ -23,6 +23,7 @@ return [
 	'index_011'        => 'RC GROUP COMPANIES',
 	'index_012'        => 'MILLIONS € TURNOVER OF',
 	'index_013'        => 'EMPLOYEES',
+	'index_099'        => 'RC GROUP ON Instagram',
 
 	// 联系我们
 	'contact_001'      => 'Contact us for any information or to request a quote',
